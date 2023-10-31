@@ -61,18 +61,15 @@ class Normal extends Driver
     {
         $metadata = [];
 
-        if (!empty($this->invoice->getDetails()['description'])) {
-            $description = $this->invoice->getDetails()['description'];
-        } else {
-            $description = $this->settings->description;
+        $description = $this->invoice->getDetail('description')
+            ?? $this->settings->description;
+
+        if (! $this->invoice->getDetail('mobile')) {
+            $metadata['mobile'] = $this->invoice->getDetail('mobile');
         }
 
-        if (!empty($this->invoice->getDetails()['mobile'])) {
-            $metadata['mobile'] = $this->invoice->getDetails()['mobile'];
-        }
-
-        if (!empty($this->invoice->getDetails()['email'])) {
-            $metadata['email'] = $this->invoice->getDetails()['email'];
+        if (! $this->invoice->getDetail('email')) {
+            $metadata['email'] = $this->invoice->getDetail('email');
         }
 
         $data = [
