@@ -64,14 +64,12 @@ class Normal extends Driver
         $description = $this->invoice->getDetail('description')
             ?? $this->settings->description;
 
-        $mobile = $this->invoice->getDetail('mobile');
-        if (! $mobile) {
-            $metadata['mobile'] = $mobile;
+        if (! $this->invoice->getDetail('mobile')) {
+            $metadata['mobile'] = $this->invoice->getDetail('mobile');
         }
 
-        $email = $this->invoice->getDetail('email');
-        if (! $email) {
-            $metadata['email'] = $email;
+        if (! $this->invoice->getDetail('email')) {
+            $metadata['email'] = $this->invoice->getDetail('email');
         }
 
         $data = [
